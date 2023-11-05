@@ -21,12 +21,12 @@ const {registerRoute} = require('./routes/register.route') ;
 app.use('/register',registerRoute) ;
 
 // static files 
-const path = require('path') ;
-app.use(express.static(path.join(__dirname,'./client/build')))
+// const path = require('path') ;
+// app.use(express.static(path.join(__dirname,'./client/build')))
 
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'./client/build/index.html'))
-})
+// app.get('*',(req,res)=>{
+//     res.sendFile(path.join(__dirname,'./client/build/index.html'))
+// })
 
 
 const port = process.env.PORT || 8000 ;
