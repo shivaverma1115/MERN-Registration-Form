@@ -4,6 +4,7 @@ const {connection} = require('./config/db') ;
 
 require('dotenv').config() ;
 const app = express() ;
+app.use(express.json()) ;
 
 app.get('/',(req,res)=>{
     return res.send({
@@ -11,8 +12,10 @@ app.get('/',(req,res)=>{
     })
 })
 
-const port = process.env.PORT ;
+const {registerRoute} = require('./routes/register.route') ;
+app.use('/register',registerRoute) ;
 
+const port = process.env.PORT ;
 app.listen(port,async()=>{
     try {
         await connection
