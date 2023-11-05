@@ -2,6 +2,15 @@ const express = require('express');
 const registerRoute = express.Router();
 
 const { registerModel } = require('../models/register.model');
+registerRoute.get('/', async (req, res) => {
+    const user = await registerModel.find();
+    if (user) {
+        return res.send(user) ;
+    }
+    else{
+        return res.send('no user found') ;
+    }
+})
 registerRoute.post('/', async (req, res) => {
     const { first_name, last_name, email, mobile_no, location, profile_img, gender, status } = req.body;
     const user = await registerModel.findOne({ email: email });
