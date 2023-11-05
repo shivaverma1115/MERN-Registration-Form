@@ -15,7 +15,7 @@ app.get('/',(req,res)=>{
 const {registerRoute} = require('./routes/register.route') ;
 app.use('/register',registerRoute) ;
 
-const port = process.env.PORT ;
+const port = 8080 ;
 app.listen(port,async()=>{
     try {
         await connection
