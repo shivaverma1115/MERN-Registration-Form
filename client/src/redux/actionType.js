@@ -1,4 +1,3 @@
 
 
-export const IncCount = 'IncCount'
-export const toggleButton = 'toggleButton'
+export const FETCH_DATA_API = 'FETCH_DATA_API'

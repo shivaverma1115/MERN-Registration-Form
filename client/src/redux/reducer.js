@@ -1,24 +1,17 @@
-import { IncCount, toggleButton } from "./actionType";
-
-
+import { FETCH_DATA_API } from "./actionType";
 
 const initialState = {
-    count:0,
-    toggleButton:true
+    tableData: []
 }
 
-export const reducer = (state=initialState, action)=>{
-    const {type, payload} = action ;
-    switch(type){
-        case IncCount:
+export const reducer = (state = initialState, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case FETCH_DATA_API:
             return {
-                ...state, count:state.count+1
-            }
-        case toggleButton:
-            return {
-                ...state, toggleButton: !state.toggleButton
+                ...state, tableData: payload
             }
         default:
-            return state ;
+            return state;
     }
 }
