@@ -3,7 +3,7 @@ const getDataRoute = express.Router();
 
 const { registerModel } = require('../models/register.model');
 getDataRoute.get('/', async (req, res) => {
-    const { first_name, email, location, status, gender ,limit} = req.query;
+    const { first_name, email, location, status, gender ,limit,skip} = req.query;
 
     let query = {};
     if (first_name) {
@@ -23,7 +23,7 @@ getDataRoute.get('/', async (req, res) => {
     }
 
 
-    const users = await registerModel.find(query).limit(limit)
+    const users = await registerModel.find(query).limit(limit).skip(skip) ;
     res.send(users)
 })
 

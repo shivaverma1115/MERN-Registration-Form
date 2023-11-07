@@ -26,28 +26,6 @@ registerRoute.post('/', async (req, res) => {
     })
 })
 
-registerRoute.put('/:_id', async (req, res) => {
-    const user = await registerModel.findOneAndUpdate({_id:req.params._id}, req.body, { new: true });
-    if (!user) {
-        return res.status(404).send({
-            msg: 'User not found 404'
-        })
-    }
-    return res.status(200).send(user)
-})
-
-registerRoute.delete('/:_id', async (req, res) => {
-    const user = await registerModel.findOneAndDelete({_id:req.params._id});
-    if (!user) {
-        return res.status(404).send({
-            msg: 'User not found 404'
-        })
-    }
-    return res.status(200).send({
-        msg:'delete successfully'
-    })
-})
-
 module.exports = {
     registerRoute
 }
