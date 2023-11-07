@@ -17,7 +17,7 @@ const RegisterUser = () => {
     setData({ ...data, [e.target.name]: e.target.value })
   }
   const handleSubmit = async () => {
-     const res = await fetch(`http://localhost:8080/register`, {
+     const res = await fetch(`${process.env.REACT_APP_URL_LINK}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -26,6 +26,7 @@ const RegisterUser = () => {
       })
       const ans = await res.json() ;
       console.log(ans) ;
+    // console.log(data) ;
   }
   return (
     <Box>
