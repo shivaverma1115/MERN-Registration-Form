@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const RegisterUser = () => {
   const nevigate = useNavigate();
@@ -13,21 +14,35 @@ const RegisterUser = () => {
     nevigate('/')
   }
   const [data, setData] = useState([]);
+  const [Img, setImg] = useState('');
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
   }
+
   const handleSubmit = async () => {
-     const res = await fetch(`${process.env.REACT_APP_URL_LINK}/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+    // ----------- Img upload --------------
+    const formData = new FormData();
+    formData.append('Image', Img)
+    axios.post(`${process.env.REACT_APP_URL_LINK}/upload`, formData)
+      .then((res) => {
+        setData({ ...data, 'profile_img': res.data.data[0].url })
+        console.log(res);
       })
-      const ans = await res.json() ;
-      console.log(ans) ;
-    // console.log(data) ;
+
+    // ----------------------------------------------------------- 
+
+    const res = await fetch(`${process.env.REACT_APP_URL_LINK}/data`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    const ans = await res.json();
+    console.log(data);
+    console.log(ans);
   }
+
   return (
     <Box>
       <Button onClick={handleGoToHome} style={{ margin: '20px' }} variant="contained">
@@ -38,7 +53,7 @@ const RegisterUser = () => {
           Register Your Details
         </Typography>
         <Box width={'fit-content'} m={'auto'} >
-          <Avatar sx={{ bgcolor: deepPurple[500] }}>SV</Avatar>
+          {/* <Avatar alt={ele.first_name} src={ele.profile_img} /> */}
         </Box>
       </Box>
       <Box width={'70%'} m={'auto'} >
@@ -60,7 +75,7 @@ const RegisterUser = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <label>Select Your Profile</label>
-            <TextField type='file' required id="Select Your Profile" name="profile_img" fullWidth autoComplete="given-name" variant="standard" onChange={(e) => handleInput(e)} />
+            <TextField type='file' required id="Select Your Profile" name="profile_img" fullWidth autoComplete="given-name" variant="standard" onChange={(e) => setImg(e.target.files[0])} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl onChange={(e) => handleInput(e)} >

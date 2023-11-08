@@ -1,4 +1,4 @@
-import { FETCH_DATA_API } from "./actionType";
+import { DELETE_USER, FETCH_DATA_API } from "./actionType";
 
 const initialState = {
     tableData: []
@@ -11,6 +11,8 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state, tableData: payload
             }
+        case DELETE_USER:
+            return state;
         default:
             return state;
     }

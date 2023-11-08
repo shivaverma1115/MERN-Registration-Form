@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_DATA_API } from "./actionType"
+import { DELETE_USER, FETCH_DATA_API } from "./actionType"
 
 export const fetchdatathroughapi = () => {
     return (dispatch, getState) => {
@@ -11,5 +11,22 @@ export const fetchdatathroughapi = () => {
                 })
             })
             .catch((err) => console.log(err))
+    }
+}
+
+export const deleteUserFromTable = (id) => {
+    return (dispatch, getState) => {
+        try {
+            axios.delete(`${process.env.REACT_APP_URL_LINK}/data/${id}`)
+                .then((res) => {
+                    dispatch({
+                        type: DELETE_USER,
+                    })
+                    console.log(res.data) ;
+                })
+        }
+        catch (error) {
+            console.error('Error deleting data:', error);
+        }
     }
 }

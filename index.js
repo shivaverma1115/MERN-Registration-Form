@@ -20,9 +20,6 @@ app.get('/', (req, res) => {
 const { getDataRoute } = require('./routes/getData.route');
 app.use('/data', getDataRoute);
 
-const { registerRoute } = require('./routes/register.route');
-app.use('/register', registerRoute);
-
 const {cloudinaryRouter} = require('./routes/cloudinary.route') ;
 app.use('/upload',cloudinaryRouter) ;
 
@@ -36,3 +33,4 @@ app.listen(port, async () => {
     }
     console.log(`app is running is ${port}`)
 })
+

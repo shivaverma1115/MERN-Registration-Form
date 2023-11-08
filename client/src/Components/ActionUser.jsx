@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -6,15 +6,23 @@ import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEye } from 'react-icons/fi';
 import { FaRegEdit } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
+import axios from 'axios';
+import { deleteUserFromTable } from '../redux/action';
+import { useDispatch } from 'react-redux';
 
-const ActionUser = () => {
+const ActionUser = ({ ele }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const dispatch = useDispatch();
     const handleClose = () => {
         setAnchorEl(null);
+        console.log(ele._id)
+        dispatch(deleteUserFromTable(ele._id));
+        alert('You want to delete User?')
     };
     return (
         <div>
@@ -25,7 +33,7 @@ const ActionUser = () => {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-                <BiDotsVerticalRounded/>
+                <BiDotsVerticalRounded />
             </Button>
             <Menu
                 id="basic-menu"
@@ -36,9 +44,8 @@ const ActionUser = () => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}><FiEye style={{marginRight:'5'}} /> View</MenuItem>
-                <MenuItem onClick={handleClose}><FaRegEdit style={{marginRight:'5'}}/>Edit</MenuItem>
-                <MenuItem onClick={handleClose}><AiOutlineDelete style={{marginRight:'5'}}/>Delete</MenuItem>
+                {/* <MenuItem onClick={handleClose}><FaRegEdit style={{marginRight:'5'}}/>Edit</MenuItem> */}
+                <MenuItem onClick={handleClose}><AiOutlineDelete style={{ marginRight: '5' }} />Delete</MenuItem>
             </Menu>
         </div>
     )
