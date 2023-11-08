@@ -19,17 +19,17 @@ const RegisterUser = () => {
     setData({ ...data, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async () => {
-    // ----------- Img upload --------------
-    const formData = new FormData();
-    formData.append('Image', Img)
-    axios.post(`${process.env.REACT_APP_URL_LINK}/upload`, formData)
-      .then((res) => {
-        setData({ ...data, 'profile_img': res.data.data[0].url })
-        console.log(res);
-      })
+  const handleUpload = async(e) => {
+    // setImg(e.target.files[0])
+    // // ----------- Img upload --------------
+    // const formData = new FormData();
+    // formData.append('Image', Img)
+    // const res = await axios.post(`${process.env.REACT_APP_URL_LINK}/upload`, formData) ;
+    // const ans = await res.j
+    // console.log(res) ;
+  }
 
-    // ----------------------------------------------------------- 
+  const handleSubmit = async () => {
 
     const res = await fetch(`${process.env.REACT_APP_URL_LINK}/data`, {
       method: "POST",
@@ -75,7 +75,9 @@ const RegisterUser = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <label>Select Your Profile</label>
-            <TextField type='file' required id="Select Your Profile" name="profile_img" fullWidth autoComplete="given-name" variant="standard" onChange={(e) => setImg(e.target.files[0])} />
+            <TextField type='file' required id="Select Your Profile" name="profile_img" fullWidth autoComplete="given-name" variant="standard"
+              onChange={(e) => handleUpload(e)}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl onChange={(e) => handleInput(e)} >

@@ -66,7 +66,7 @@ const TableUser = () => {
               user.map((ele, i) => {
                 return <TableRow key={i} style={{ textAlign: 'center' }}>
                   <TableCell >
-                    <Avatar alt={ele.first_name} src={ele.profile_img} />
+                    <Avatar sx={{ bgcolor: 'Purple' }}>{i+1}</Avatar>
                   </TableCell >
                   <TableCell >{ele.first_name} {ele.last_name}</TableCell >
                   <TableCell >{ele.email}</TableCell >
